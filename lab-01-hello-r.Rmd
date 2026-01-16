@@ -1,11 +1,12 @@
 ---
 title: "Lab 01 - Hello R"
 author: "Kryschelle Fakir"
-date: "Insert date here"
+date: "1/16/2026"
 output: 
   html_document: 
-    fig_height: 4
-    fig_width: 9
+    highlight: pygments
+    theme: lumen
+    fig_height: 7
 ---
 
 ## Load packages and data
@@ -46,13 +47,14 @@ dino_data %>%
 
 To begin, we will filter out the 'star' data from the datasaurus_dozen dataframe so we can have the specific x and y values needed to graph the star. We will call him Patrick. Then we will tell R to graph the x and y values of the filtered dataset. We will then specify that R graph these data using geometric points. 
 
-```{r plot-star}
+```{r plot-star, fig.height=6, fig.width=6}
 star_data <- datasaurus_dozen %>%
   filter(dataset == "star")
 
 ggplot(data = star_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
+
 To calculate the correlation coefficient of the star, we will tell R to run the correlation on variables x and y in the star_data dataset using the cor function.
 
 ```{r cor-star}
@@ -65,7 +67,7 @@ The star and dino correlations are incredibly similar. The star correlation is -
 ### Exercise 4
 
 To begin, we will filter out cases in the datasaurus_dozen dataframe that come from the circle dataset. Then we will plot the x and y values from the x and y variables from the filtered dataset.
-```{r plot-circle}
+```{r plot-circle, fig.height=6, fig.width=6}
 circle_data <- datasaurus_dozen %>%
   filter(dataset == "circle")
 
@@ -73,6 +75,7 @@ ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
   geom_point()
 
 ```
+
 Next, we will tell R to caluclate the correlation coefficient of x and y from the circle dataset. 
 
 ```{r cor-circle}
@@ -84,9 +87,43 @@ The correlation for the circle relationship is stronger than th dino relationshi
 It also looks more oval than circular -- I'd be curious if the plot could be stretched to make it more circular.
 ### Exercise 5
 
-This is your final exercise! Add code and narrative as needed. Be creative and show off what you’ve learned so far.
-Add code and narrative as needed.
+We will now plot all of the datasets included in the datasaurus_dozen dataframe. Now they can all shine...
 
-To add additional R chunks, you can either type the backticks, curly braces, and the letter `r`, or use the "Insert Chunk" button above (the green C+ icon). Have fun!
+``` {r all-plot}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset)) +
+  geom_point() +
+  facet_wrap(~dataset, ncol = 3) +
+  theme(legend.position = "none")
+```
 
+``` {r all-cor}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
+```
+### Bullseye
+I am also curious what bullseye looks like...
 
+``` {r plot-bullseye}
+bullseye_data <- datasaurus_dozen %>%
+  filter(dataset == "bullseye")
+
+ggplot(data = bullseye_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+
+WOAH!!!
+
+### Away
+What is away?? 
+
+``` {r away-plot}
+away_data <- datasaurus_dozen %>%
+  filter(dataset == "away")
+
+ggplot(data = away_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+
+gnarly...
