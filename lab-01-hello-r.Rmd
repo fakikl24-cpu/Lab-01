@@ -64,16 +64,24 @@ The star and dino correlations are incredibly similar. The star correlation is -
 
 ### Exercise 4
 
-Add your code and narrative to complete this exercise. Use the conventions from the previous exercises to name your chunks and organize your work.
+To begin, we will filter out cases in the datasaurus_dozen dataframe that come from the circle dataset. Then we will plot the x and y values from the x and y variables from the filtered dataset.
+```{r plot-circle}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
 
-```{r}
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 
 ```
+Next, we will tell R to caluclate the correlation coefficient of x and y from the circle dataset. 
 
-```{r}
-
+```{r cor-circle}
+circle_data %>%
+  summarize(r = cor(x, y))
 ```
+The correlation for the circle relationship is stronger than th dino relationship and the star relationship. However, the r value is still centered around -0.06, suggesting that this value does arise from the presence of a curvilinear relationship. 
 
+It also looks more oval than circular -- I'd be curious if the plot could be stretched to make it more circular.
 ### Exercise 5
 
 This is your final exercise! Add code and narrative as needed. Be creative and show off what you’ve learned so far.
