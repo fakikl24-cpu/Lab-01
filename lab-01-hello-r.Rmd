@@ -49,11 +49,15 @@ This is your turn to write the code and narrative for the star dataset. Follow t
 Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.
 To finish, clean up the narrative by removing these instructions.
 
+To begin, we will filter out the 'star' data from the datasaurus_dozen dataframe so we can have the specific x and y values needed to graph the star. We will call him Patrick. Then we will tell R to graph the x and y values of the filtered dataset. We will then specify that R graph these data using geometric points. 
+
 ```{r plot-star}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
 
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
-
-I'm some filler text, you should replace me with more meaningful text...
 
 ```{r cor-star}
 
